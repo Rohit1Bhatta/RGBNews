@@ -1,0 +1,280 @@
+import React from "react";
+// import styled from 'styled-components';
+import PropTypes from "prop-types";
+import NewsItem from "./NewsItem";
+import Spinner from "./Spinner";
+
+// #region constants
+
+// #endregion
+
+// #region styled-components
+
+// #endregion
+
+// #region functions
+
+// #endregion
+
+// #region component
+
+
+
+
+const propTypes = {
+  pageSize: PropTypes.number,
+  country: PropTypes.string,
+  category: PropTypes.string,
+};
+
+const defaultProps = {
+  pageSize: 5,
+  country: "in",
+  category: "general",
+};
+
+
+/**
+ *
+ */
+class NewsComponent extends React.Component {
+  articles = [
+    {
+      source: { id: "lequipe", name: "L'equipe" },
+      author: "L'EQUIPE",
+      title:
+        "Michel Salgado sur l'absence de l'Italie : « Je pense que quelque chose ne va pas »",
+      description:
+        "Présent au match entre certaines légendes du football et des travailleurs du Qatar, au stade Al-Thumama, l'ancien international espagnol Michel Salgado a été interrogé sur l'absence de l'Italie. Et pour lui, il y a quelque chose qui ne va pas au sein de cette…",
+      url: "https://www.lequipe.fr/Football/Actualites/Michel-salgado-sur-l-absence-de-l-italie-je-pense-que-quelque-chose-ne-va-pas/1369822",
+      urlToImage:
+        "https://medias.lequipe.fr/img-video-cover/1500000001723995/640/0",
+      publishedAt: "2022-12-12T23:28:00+00:00",
+      content:
+        "Michel Salgado : « C'est dommage, parce qu'en Coupe du monde, on veut vraiment toutes les grandes équipes et l'Italie est l'une des grandes équipes. C'est une surprise qu'elle ait gagné le Championna… [+332 chars]",
+    },
+    {
+      source: { id: "lequipe", name: "L'equipe" },
+      author: "L'EQUIPE",
+      title: "Nuno Gomes : « Je pense que la finale sera France-Argentine »",
+      description:
+        "Après le match entre quelques légendes du football et des travailleurs du Qatar au stade Al-Thumama, l'ancien international portugais Nuno Gomes a donné son pronostic pour la finale de cette Coupe du monde 2022.",
+      url: "https://www.lequipe.fr/Football/Actualites/Nuno-gomes-je-pense-que-la-finale-sera-france-argentine/1369814",
+      urlToImage:
+        "https://medias.lequipe.fr/img-video-cover/1500000001723977/640/0",
+      publishedAt: "2022-12-12T22:23:32+00:00",
+      content:
+        "Nuno Gomes, ancien international portugais : « Je pense que la finale sera France-Argentine. Mais la Croatie, pour la deuxième fois consécutive, est dans le dernier carré et elle montre toujours une … [+139 chars]",
+    },
+    {
+      source: { id: "talksport", name: "TalkSport" },
+      author: "Natasha Everitt",
+      title:
+        "Pele health ‘improving’ and is ‘conscious and with stable vital signs’ but Brazil legend and football icon...",
+      description:
+        "The 82-year-old has been at Sao Paulo’s Albert Einstein Hospital since November 29 to re-evaluate his treatmentHe is also being treated for a respiratory infection diagnosed following his hospitalisation that was aggravated by COVID. Now, medical staff have given an update on the footballing icon’s health.The patient continues to show improvement in the clinical status, in particular the respiratory infection,” they have been quoted saying by ESPN.ns in a regular room, is conscious and with stable vital signs.”",
+      url: "https://talksport.com/football/1275432/pele-health-update-brazil-cancer/",
+      urlToImage:
+        "https://talksport.com/wp-content/uploads/sites/5/2022/12/2022-doctors-said-reevaluation-chemotherapy-780282422.jpg?strip=all&quality=100&w=1920&h=1080&crop=1",
+      publishedAt: "2022-12-12T17:34:43Z",
+      content:
+        "Brazil and football icon Pele’s health is said to be ‘improving’ but it’s unclear when he will be discharged from hospital.\r\nThe Selecao legend, who won three World Cups, has been battling colon canc… [+2447 chars]",
+    },
+    {
+      source: { id: "usa-today", name: "USA Today" },
+      author: null,
+      title:
+        "Mississippi State football coach Mike Leach remains in hospital, in critical condition",
+      description:
+        "MSU said Sunday that Mike Leach suffered a medical incident at his home and was taken to a hospital. As of Monday, he remained in critical condition.",
+      url: "https://www.usatoday.com/story/sports/ncaaf/sec/2022/12/12/mike-leach-health-update-mississippi-state-football-coach/10882426002/",
+      urlToImage:
+        "https://www.gannett-cdn.com/-mm-/765278776638e84b5ea49e96d2c1bd825c12e87f/c=0-298-5708-3509/local/-/media/2022/08/26/USATODAY/usatsports/f8820dec20ac424aad440456827cd2b0.jpg?auto=webp&format=pjpg&width=1200",
+      publishedAt: "2022-12-12T17:23:56+00:00",
+      content:
+        'One day after he was hospitalized for a "personal health issue," Mississippi State football coach Mike Leach remains in the hospital and is in critical condition, the university said Monday.\r\n"Mike\'s… [+1278 chars]',
+    },
+    {
+      source: { id: "espn", name: "ESPN" },
+      author: null,
+      title:
+        "Mississippi State football coach Mike Leach still in critical condition",
+      description:
+        'Mississippi State coach Mike Leach remains in critical condition after being hospitalized Sunday with what has been called a "personal health issue."',
+      url: "http://espn.go.com/college-football/story/_/id/35238774/mississippi-state-football-coach-mike-leach-critical-condition",
+      urlToImage:
+        "https://a2.espncdn.com/combiner/i?img=%2Fphoto%2F2020%2F0110%2Fr650724_1296x729_16%2D9.jpg",
+      publishedAt: "2022-12-12T16:57:00Z",
+      content:
+        'Mississippi State coach Mike Leach remains hospitalized and in critical condition, the university said in a statement Monday morning. Leach suffered what was called on Sunday a "personal health issue… [+568 chars]',
+    },
+    {
+      source: { id: "al-jazeera-english", name: "Al Jazeera English" },
+      author: "David Child, Faras Ghani",
+      title: "Can history-makers Morocco win the World Cup?",
+      description:
+        "Fairytale run to the semi-finals has seen the Atlas Lions create footballing history but now France await.",
+      url: "http://www.aljazeera.com/sports/2022/12/12/can-morocco-win-the-world-cup",
+      urlToImage:
+        "https://www.aljazeera.com/wp-content/uploads/2022/12/AP22344641424480.jpg?resize=1920%2C1440",
+      publishedAt: "2022-12-12T16:12:32Z",
+      content:
+        "History-makers Morocco are two wins away from lifting a football World Cup trophy.\r\nThe team is yet to be beaten at this years tournament and has conceded just once an own-goal against Canada in the … [+5715 chars]",
+    },
+    {
+      source: { id: "espn-cric-info", name: "ESPN Cric Info" },
+      author: null,
+      title:
+        "Five famous people (and one cat) you didn't know have ESPNcricinfo profiles | ESPNcricinfo.com",
+      description:
+        "Why do a footballer, a Nobel laureate and a prime minister (no, not Imran Khan) find themselves in the ESPNcricinfo player database? | ESPNcricinfo.com",
+      url: "http://www.espncricinfo.com/story/_/id/29102695/five-famous-people-one-cat-know-espncricinfo-profiles",
+      urlToImage:
+        "https://a.espncdn.com/i/cricket/cricinfo/1221668_1296x1296.gif",
+      publishedAt: "2020-04-27T07:20:43Z",
+      content:
+        "Why do a cat, a footballer, a Nobel laureate and a prime minister find themselves in the ESPNcricinfo database? Here are six player profiles you wouldn't have expected we had.\r\nPeter the catThe only … [+5504 chars]",
+    },
+    {
+      source: { id: "le-monde", name: "Le Monde" },
+      author: "Asia Balluffier",
+      title:
+        "Vidéo. Euro 2021 : comment la peur du ridicule explique la plupart des penaltys ratés",
+      description:
+        "Vidéo - En observant quelque 300 penaltys tirés dans les principales compétitions de football dans le monde, des chercheurs se sont rendu compte que les joueurs adoptaient rarement la meilleure stratégie pendant leur match.",
+      url: "https://www.lemonde.fr/sport/video/2019/06/12/coupe-du-monde-2019-comment-la-peur-du-ridicule-explique-la-plupart-des-penaltys-rates_5475435_3242.html",
+      urlToImage:
+        "https://img.lemde.fr/2021/06/18/0/140/1519/1013/1440/960/60/0/f50a703_51711191-962deaf-9we7kxocfspdodkl7jbvfnzt.png",
+      publishedAt: "2019-06-12T18:51:22Z",
+      content:
+        "Cette vidéo a été publiée lan dernier pour le Mondial 2018. LEuro 2021 est loccasion dévoquer à nouveau la peur que suscitent les penaltys chez les joueurs et joueuses de foot.\r\nAu football, le penal… [+1129 chars]",
+    },
+    {
+      source: { id: "le-monde", name: "Le Monde" },
+      author: "Pierre Trouvé",
+      title:
+        "Vidéo. Coupe du monde 2022 : pourquoi le football est-il un sport si imprévisible ?",
+      description:
+        "Vidéo - Le faible nombre de buts marqués durant un match permet aux petites équipes de renverser plus facilement les favoris.",
+      url: "https://www.lemonde.fr/sport/video/2019/06/07/coupe-du-monde-2019-pourquoi-le-football-est-il-un-sport-si-imprevisible_5472735_3242.html",
+      urlToImage:
+        "https://img.lemde.fr/2021/06/18/2/27/1517/1011/1440/960/60/0/fb5b7e0_494039165-459e206-cq4et4k6qkkjxrsi4stzzcoc.jpg",
+      publishedAt: "2019-06-07T08:27:02Z",
+      content:
+        "Cette vidéo a été publiée pour le mondial de 2018. La Coupe du monde 2022 est loccasion de revenir sur les origines de limprévisibilité du football.\r\nAu football, de petites équipes réussissent régul… [+746 chars]",
+    },
+  ];
+ capitalizeFirstLetter=(string)=> {
+    return string.charAt(0).toUpperCase() + string.slice(1);
+  }
+
+  constructor(props) {
+    super(props);
+
+    this.state = {
+      articles: this.articles,
+      loading: false,
+      page: 1,
+    };
+    document.title=`RGB News-${this.capitalizeFirstLetter(this.props.category)}`
+  }
+  
+  async updatePage(){
+    const url = `https://newsapi.org/v2/top-headlines?country=${
+      this.props.country
+    }&category=${
+      this.props.category
+    }&apiKey=923e8d7705a8477e8b7bce80917fe9fe&page=
+        ${this.state.page }&pageSize=${this.props.pageSize}`;
+    this.setState({ loading: true });
+    let data = await fetch(url);
+    let parsedData = await data.json();
+
+    this.setState({
+      totalResults: parsedData.totalResults,
+      articles: parsedData.articles,
+      loading: false,
+    });
+
+  }
+
+
+  async componentDidMount() {
+    console.log(this.state.articles)
+
+    this.updatePage();
+  }
+  handleNextClick = async () => {
+    console.log(this.state.page)
+
+    this.setState({
+      page: this.state.page +1
+    });
+    this.updatePage();
+
+  };
+  handlePrevClick = async () => {
+   
+    this.setState({
+      page: this.state.page +1
+    });
+    this.updatePage();
+  };
+  render() {
+    return (
+      <div className="container my-3 ">
+        <h2 className="text-center">RGB News {this.capitalizeFirstLetter (this.props.category)}  HeadLines </h2>
+
+        {this.state.loading && <Spinner />}
+
+        <div className="row ">
+          {
+            this.state.articles.map((element) => {
+              return (
+                <div className="col-md-4" key={element.url}>
+                  <NewsItem
+                    title={element.title ? element.title : ""}
+                    description={element.description ? element.description : ""}
+                    imageUrl={element.urlToImage}
+                    newsUrl={element.url}
+                    author={element.author ? element.author : "Unknown"}
+                    date={element.publishedAt} 
+                    source={element.source.name}
+                  />
+                </div>
+              );
+            })}
+
+          <div className="container my-3 d-flex justify-content-between">
+            <button
+              disabled={this.state.page <= 1}
+              type="button"
+              className="btn btn-dark mx -2 "
+              onClick={this.handlePrevClick}
+            >
+              &larr; Previous
+            </button>
+            <button
+              disabled={
+                this.state.page + 1 >
+                Math.ceil(this.state.totalResults / this.props.pageSize)
+              }
+              type="button"
+              className="btn btn-dark mx-5"
+              onClick={this.handleNextClick}
+            >
+              {" "}
+              Next &rarr;
+            </button>
+          </div>
+        </div>
+      </div>
+    );
+  }
+}
+
+NewsComponent.propTypes = propTypes;
+NewsComponent.defaultProps = defaultProps;
+// #endregion
+
+export default NewsComponent;
